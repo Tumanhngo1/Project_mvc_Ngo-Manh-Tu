@@ -38,45 +38,55 @@ views/layouts/main.php
         <!--    </aside>-->
         <?php require_once "views/layouts/header.php";?>
         <!-- Breadcrumd Wrapper. Contains breadcrumb -->
-        
-<div class="top">
-        <?php if (isset($_SESSION['success'])):?>
-        <div class="toasts">
-            <div class="toasts success">
-                <!-- <i class="fa-solid fa-circle-check"></i> -->
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <span class="messege">
-                    <?php
-                echo $_SESSION['success'];
-                unset($_SESSION['success']);?>
-                </span>
-                <span class="countdown"></span>
-            </div>
-        </div>
-        <?php endif ;?>
 
-        <?php if(isset($this->error)):?>
-        <div id="toasts">
-            <div class="toasts error">
-                <!-- <i class="fa-solid fa-circle-check"></i> -->
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <span class="messege"><?php echo $this->error ;?></span>
-                <span class="countdown"></span>
+        <div class="top">
+
+            <?php if(isset($this->error)):?>
+            <div id="toasts">
+                <div class="toasts error">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span class="messege"><?php echo $this->error ;?></span>
+                    <span class="countdown"></span>
+                </div>
             </div>
-        </div>
-        <?php endif;?>
-        <?php  if (isset($_SESSION['error'])):?>
-        <div id="toasts">
-            <div class="toasts error">
-                <!-- <i class="fa-solid fa-circle-check"></i> -->
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <span class="messege"><?php 
+            <?php elseif(isset($_SESSION['error'])) :?>
+            <div id="toasts">
+                <div class="toasts error">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span class="messege">
+                        <?php echo $_SESSION['error'];
+                            unset($_SESSION['error'])
+                    ;?>
+                    </span>
+
+                </div>
+            </div>
+            <?php endif ;?>
+            <?php if(isset($_SESSION['success'])): ;?>
+            <div id="adimation">
+                <div class="adimation success">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span class="">
+                        <?php echo $_SESSION['success'];
+                            unset($_SESSION['success'])
+                    ;?>
+                    </span>
+
+                </div>
+            </div>
+            <?php endif;?>
+            <?php  if (isset($_SESSION['error'])):?>
+            <div id="toasts">
+                <div class="toasts error">
+                    <!-- <i class="fa-solid fa-circle-check"></i> -->
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span class="messege"><?php 
                  echo $_SESSION['error'];
                   unset($_SESSION['error']);?></span>
-                <span class="countdown"></span>
+                    <span class="countdown"></span>
+                </div>
             </div>
-        </div>
-        <?php endif;?>>
+            <?php endif;?>>
         </div>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

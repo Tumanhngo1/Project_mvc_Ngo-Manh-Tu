@@ -227,6 +227,7 @@ h5 {
   overflow: hidden;
   padding: 0;
   margin-top: 20px;
+  z-index: 0;
 }
 .img-main2 {
   width: 100%;
@@ -903,9 +904,9 @@ a.pull-right:hover {
 }
 
 /* ...................animation................................. */
-.success {
+/* .success {
   background-color: var(--success);
-}
+} */
 .warning {
   background-color: var(--warning);
 }
@@ -913,7 +914,7 @@ a.pull-right:hover {
   background-color: var(--error);
 }
 
-.toasts {
+#toasts {
   position: fixed;
   /* top:10px; */
   right: 10px;
@@ -923,45 +924,28 @@ a.pull-right:hover {
   border: none;
   border-radius: 6px;
   color: white;
-  /* border-left:6px solid var(--success); */
+  border-left:6px solid var(--error);
   overflow: hidden;
   animation: slide_show 5s ease forwards;
+  z-index: 1;
 }
 .toasts i {
   margin: 0 10px;
 }
-.toasts.success {
-  background: var(--success-light);
-}
-.toasts .countdown {
-  background: var(--success);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  animation: countdown 3s ease;
-}
+
+
 .toasts.error {
   background: var(--error-light);
 }
-.toasts .countdown {
-  background: var(--error);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  animation: countdown 3s ease;
-}
-@keyframes countdown {
+
+ /* @keyframes countdown {
   0% {
     width: 100%;
   }
   100% {
     width: 0;
   }
-}
+} */
 @keyframes slide_show {
   0% {
     transform: translateX(-10%);
@@ -975,6 +959,23 @@ a.pull-right:hover {
   100% {
     transform: translateX(200%);
   }
+} 
+div#adimation {
+  position: fixed;
+  right: 10px;
+  top: 50px
+ 
+}
+.adimation.success {
+  padding: 10px;
+  border: none;
+  background: rgb(118 205 118);
+  color: white;
+  overflow: hidden;
+  border-left: green 6px solid;
+    border-radius: 6px;
+    animation: slide_show 5s ease forwards;
+    z-index: 1;
 }
 /* .............menu............. */
 a#small {
