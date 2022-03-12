@@ -13,7 +13,7 @@
         </div>
        
         <div class="main-login">
-            <?php if (!isset($_SESSION['email'])):;?>
+            <?php if (empty($_SESSION['email'])):;?>
             <h5>Nếu chưa là thành viên hãy đăng ký để thanh toán <a class="btn btn-outline" href="index.php?controller=user&action=register">Đăng ký</a></h5>
             
 

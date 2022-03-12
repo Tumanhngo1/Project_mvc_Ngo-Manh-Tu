@@ -87,7 +87,7 @@
                                     <img src="../Backend/assets/uploads/<?php echo $champion['avatars']?>">
                                 <?php endif;?>
                                 <div class="card_action">
-                                    <div class="card_left product_title" data_id="<?php echo $champion['id']?>"> <a href="index.php?controller=product&action=detail&id=<?php echo $champion['id'] ;?>"><i class="fa-solid fa-eye"></i></a></div>
+                                    <div class="card_left "> <a href="index.php?controller=product&action=detail&id=<?php echo $champion['id'] ;?>"><i class="fa-solid fa-eye"></i></a></div>
                                     <div   class="card_right product_title"  data_id="<?php echo $champion['id']?>" ><a href="index.php?controller=cart&action=index"><i class="fa-solid fa-cart-shopping"></i></a></div>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <div class="card_title">
-                <div class="card_left product_title" href="#" data_id="<?php echo $show['id']?>"> <a
+                <div class="card_left "> <a
                                 href="index.php?controller=product&action=detail&id=<?php echo $show['id'] ;?>"> 
                                 <?php echo $show['title'];?></a></div>
                    

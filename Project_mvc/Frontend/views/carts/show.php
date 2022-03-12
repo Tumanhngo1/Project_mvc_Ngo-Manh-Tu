@@ -11,7 +11,6 @@
 </div>
 <div class="main-cart">
     <div class="main_cart_top">
-
          <table class="table">
                 <thead>
                 <tr>
@@ -23,8 +22,10 @@
                     <th scope="col">Số tiền</th>
                     <th scope="col">Số lượng</th>
                     <th scope="col">Tổng số tiền</th>
+                    <th scope="col">Ngày đặt hàng</th>
                 </tr>
                 </thead>
+           
                 <tbody>
 
                     <?php $cart_total = 0;?>
@@ -42,12 +43,15 @@
                             echo number_format($total);
 
                             ?></td>
+                         <td><?php echo date('d-m-Y',strtotime($cart['create_at'])) ;?></td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>
+           
             </table>
             <div> <span>Tổng thanh toán: </span><?php echo number_format($cart_total);?>đ<span>  Cảm ơn bạn đã tin tưởng và sử dụng sản phẩm bên mình</span></div>
-    </div>
+           
+        </div>
 </div>
 </div>
 <div class="autoplay">

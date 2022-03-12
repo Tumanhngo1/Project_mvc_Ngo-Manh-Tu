@@ -87,8 +87,8 @@
                                     <img src="../Backend/assets/uploads/<?php echo $clothing['avatars']?>">
                                     <?php endif;?>
                                     <div class="card_action">
-                                        <div class="card_left product_title" 
-                                            data_id="<?php echo $clothing['id']?>"> <a
+                                        <div class="card_left " 
+                                            > <a
                                                 href="index.php?controller=product&action=detail&id=<?php echo $clothing['id'] ;?>"><i
                                                     class="fa-solid fa-eye"></i></a></div>
                                         <div class="card_right product_title" 
@@ -135,7 +135,7 @@
             <div class="card col-sm-3 col-lg-3">
 
                 <div class="card_img">
-                    <a class="product_title" data_id="<?php echo $show['id']?>"
+                    <a class=""
                         href="index.php?controller=product&action=detail&id=<?php echo $show['id'] ;?>">
 
                         <?php if(!empty($show['avatars'])):?>

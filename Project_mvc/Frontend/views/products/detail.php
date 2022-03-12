@@ -53,14 +53,14 @@
                                         <div class="detail_check">
                                             <a class="delete" delete="<?php echo $product['id']?>" href="#"><i
                                                     class="fa-solid fa-angles-left"></i></a>
-                                            <?php
+                                            <!-- <?php
                                             $amount = '';
                                             if($_SESSION['cart']){
                                                 $amount = '1';
                                             }else{
                                                 $amount = '0';
-                                            } ;?>
-                                            <span class="cart-amount"><?php echo $amount ;?></span>
+                                            } ;?> -->
+                                            <span class="cart-amount">1</span>
 
                                             <a class="product_title" href="#" data_id="<?php echo $product['id']?>"><i
                                                     class="fa-solid fa-angles-right"></i></a>
@@ -72,7 +72,8 @@
 
 
                         <div>
-                            <a href="index.php?controller=cart&action=index" class="btn btn-success product_title">Mua
+                            <a  data_id="<?php echo $product['id']?>" 
+                            href="index.php?controller=cart&action=index" class="btn btn-success product_title">Mua
                                 ngay</a>
                         </div>
                     </div>
@@ -108,7 +109,7 @@
                     </div>
                 </div>
                 <div class="card_title">
-                <div class="card_left product_title" href="#" data_id="<?php echo $show['id']?>"> <a
+                <div class="card_left"> <a
                                 href="index.php?controller=product&action=detail&id=<?php echo $show['id'] ;?>"> 
                                 <?php echo $show['title'];?></a></div>
                    

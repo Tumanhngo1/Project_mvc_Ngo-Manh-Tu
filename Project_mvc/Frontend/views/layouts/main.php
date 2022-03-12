@@ -7,14 +7,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <!-- <script src="js/jquery-3.6.0.min.map"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
+    <!-- <link rel="stylesheet" href="css/all.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
         integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
         integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -81,7 +85,8 @@
                             <i class="fa-solid fa-bars"></i>
                         </div>
                         <ul class="menu">
-                            <li class="head_menu"><a href="">SNEACKERS</a>
+                            <li> <a id="small" href="index.php?controller=product&action=champion">SNEACKERS</a></li>
+                            <li id="big" class="head_menu"><a href="">SNEACKERS</a>
                                 <ul class="sub-menu">
                                     <?php foreach ($categories as $category):?>
                                     <li><a
@@ -107,8 +112,8 @@
                                     $cart = "<a class='card_head' href='index.php?controller=cart&action=index' ><i class='fas fa-shopping-cart'></i></a>" ;
                                     $pro =  "<a class='card_head' href='index.php?controller=cart&action=show' ><i class='fa-brands fa-pushed'></i></a>" ;
                                 }else{
-                                    $cart = "<a class='card_head'  href='#' ><i class='fas fa-shopping-cart'></i></a>";
-                                    $pro = "<a class='card_head'  href='#' ><i class='fa-brands fa-pushed'></i></a>";
+                                    $cart = "<a class='card_head'  href='index.php?controller=cart&action=index' ><i class='fas fa-shopping-cart'></i></a>";
+                                    $pro = "<a class='card_head'  href='index.php?controller=user&action=login' ><i class='fa-brands fa-pushed'></i></a>";
                                 }
                                 echo $cart;
                                 echo $pro;
@@ -131,22 +136,42 @@
             <i class="fa-solid fa-angle-up"></i>
         </div>
         
-        <div class="main-center">
-         <?php if (isset($_SESSION['success'])):?>
-        <div class="toasts">
-            <div class="toasts success">
-            
+      
+        <?php if(isset($this->error)):?>
+        <div id="toasts">
+            <div class="toasts error">
                 <i class="fa-solid fa-triangle-exclamation"></i>
-                <span class="messege">
-                    <?php
-                 echo $_SESSION['success'];
-                 unset($_SESSION['success']);?>
-                </span>
+                <span class="messege"><?php echo $this->error ;?></span>
                 <span class="countdown"></span>
             </div>
         </div>
-        <!-- <?php endif;?> -->
-
+        <?php elseif(isset($_SESSION['error'])) :?>
+            <div id="toasts">
+            <div class="toasts error">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span class="messege">
+                    <?php echo $_SESSION['error'];
+                            unset($_SESSION['error'])
+                    ;?>
+                </span>
+              
+            </div>
+        </div>
+        <?php endif ;?>
+        <?php if(isset($_SESSION['success'])): ;?>
+        <div id="adimation">
+            <div class="adimation success">
+            <i class="fa-solid fa-circle-check"></i>
+                <span class="">
+                <?php echo $_SESSION['success'];
+                            unset($_SESSION['success'])
+                    ;?>
+                </span>
+             
+            </div>
+        </div>
+            <?php endif; ?>
+            <div class="main-center">
         
             <div class="container">
                 <div class="row">
@@ -199,10 +224,11 @@
                 <?php foreach($categories as $category):?>
                 <div class="card col-sm-3 col-lg-3">
 
-                    <div class="card_img">
+                    <div class="card_img"><a href="index.php?controller=product&action=index&id=<?php echo $category['id'];?>">
                         <?php if(!empty($category['avatar'])):?>
                         <img src="../Backend/assets/uploads/<?php echo $category['avatar']?>">
                         <?php endif;?>
+                        </a>
                         
                     </div>
                     

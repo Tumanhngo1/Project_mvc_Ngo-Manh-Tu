@@ -47,7 +47,7 @@
                          
                             <div class="login"><span><a href="index.php?controller=user&action=login"><?php
                                 $login = '';
-                                if (isset($_SESSION['email'])){
+                                if (!empty($_SESSION['email'])){
                                     $login = $_SESSION['email']['name'];
                                 }else{
                                     $login = "Đăng nhập";
@@ -56,7 +56,7 @@
                                 ;?></a></span></div>
                             <div class="logout"><span><a href="index.php?controller=user&action=register"><?php
                                  $login = '';
-                                if (isset($_SESSION['email'])){
+                                if (!empty($_SESSION['email'])){
                                     $login = "<a href='index.php?controller=user&action=logout' >Đăng xuất</a>" ;
                                 }else{
                                     $login = "Đăng ký";
@@ -90,7 +90,7 @@
 
                                 <a id="small" href="index.php?controller=product&action=champion">SNEACKERS</a>
                                 <div id="big">
-                                    <a href="">SNEACKERS</a>
+                                    <a  href="">SNEACKERS</a>
                                     <ul class="sub-menu">
                                         <?php foreach ($categories as $category):?>
                                         <li><a
@@ -116,8 +116,8 @@
                                     $cart = "<a class='card_head' href='index.php?controller=cart&action=index' ><i class='fas fa-shopping-cart'></i></a>" ;
                                     $pro =  "<a class='card_head' href='index.php?controller=cart&action=show' ><i class='fa-brands fa-pushed'></i></a>" ;
                                 }else{
-                                    $cart = "<a class='card_head'  href='gio-hang-cua-ban.html' ><i class='fas fa-shopping-cart'></i></a>";
-                                    $pro = "<a class='card_head'  href='#' ><i class='fa-brands fa-pushed'></i></a>";
+                                    $cart = "<a class='card_head'  href='index.php?controller=cart&action=index' ><i class='fas fa-shopping-cart'></i></a>";
+                                    $pro = "<a class='card_head'  href='index.php?controller=user&action=login' ><i class='fa-brands fa-pushed'></i></a>";
                                 }
                                 echo $cart;
                                 echo $pro;
@@ -143,43 +143,42 @@
         <div class="backtop">
             <i class="fa-solid fa-angle-up"></i>
         </div>
-        <?php if (isset($_SESSION['success'])):?>
-        <div class="toasts">
-            <div class="toasts success">
-                <!-- <i class="fa-solid fa-circle-check"></i> -->
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <span class="messege">
-                    <?php
-                echo $_SESSION['success'];
-                unset($_SESSION['success']);?>
-                </span>
-                <span class="countdown"></span>
-            </div>
-        </div>
-        <?php endif ;?>
+       
 
         <?php if(isset($this->error)):?>
         <div id="toasts">
             <div class="toasts error">
-                <!-- <i class="fa-solid fa-circle-check"></i> -->
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <span class="messege"><?php echo $this->error ;?></span>
                 <span class="countdown"></span>
             </div>
         </div>
-        <?php endif;?>
-        <?php  if (isset($_SESSION['error'])):?>
-        <div id="toasts">
+        <?php elseif(isset($_SESSION['error'])) :?>
+            <div id="toasts">
             <div class="toasts error">
-                <!-- <i class="fa-solid fa-circle-check"></i> -->
                 <i class="fa-solid fa-triangle-exclamation"></i>
-                <span class="messege"><?php 
-                 echo $_SESSION['error'];
-                  unset($_SESSION['error']);?></span>
-                <span class="countdown"></span>
+                <span class="messege">
+                    <?php echo $_SESSION['error'];
+                            unset($_SESSION['error'])
+                    ;?>
+                </span>
+              
             </div>
         </div>
-        <?php endif;?>
+        <?php endif ;?>
+        <?php if(isset($_SESSION['success'])): ;?>
+        <div id="adimation">
+            <div class="adimation success">
+            <i class="fa-solid fa-circle-check"></i>
+                <span class="">
+                <?php echo $_SESSION['success'];
+                            unset($_SESSION['success'])
+                    ;?>
+                </span>
+             
+            </div>
+        </div>
+            <?php endif; ?>
         <?php echo $this->content;?>
 
     </div>

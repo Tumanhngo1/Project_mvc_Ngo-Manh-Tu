@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="main-title">
-                <h4>GIÀY <?php echo $product['name'];?></h4>
+                <h4><?php echo $product['name'];?></h4>
             </div>
         </div>
     </div>
@@ -88,8 +88,8 @@
                                     <img src="../Backend/assets/uploads/<?php echo $product['avatars']?>">
                                     <?php endif;?>
                                     <div class="card_action">
-                                        <div class="card_left product_title" href="#"
-                                            data_id="<?php echo $product['id']?>"> <a
+                                        <div class="card_left "
+                                            > <a
                                                 href="index.php?controller=product&action=detail&id=<?php echo $product['id'] ;?>"><i
                                                     class="fa-solid fa-eye"></i></a></div>
                                         <div class="card_right product_title" href="#"
@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div class="card_title">
-                <div class="card_left product_title" href="#" data_id="<?php echo $show['id']?>"> <a
+                <div class="card_left "> <a
                                 href="index.php?controller=product&action=detail&id=<?php echo $show['id'] ;?>"> 
                                 <?php echo $show['title'];?></a></div>
                    
