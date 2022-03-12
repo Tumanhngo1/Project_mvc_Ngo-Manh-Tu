@@ -36,7 +36,7 @@
                         <td><?php echo $cart['address'];?></td>
                         <td><?php echo $cart['phone'];?></td>
                         <td><?php echo $cart['title'];?></td>
-                        <td><?php echo $cart['price'];?></td>
+                        <td><?php echo number_format( $cart['price']);?></td>
                         <td><?php echo $cart['quantity'];?></td>
                         <td><?php $total= $cart['quantity'] * $cart['price'];
                             $cart_total +=$total;
