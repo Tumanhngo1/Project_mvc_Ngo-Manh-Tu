@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2022 at 03:21 PM
+-- Generation Time: Mar 13, 2022 at 07:07 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -136,6 +136,28 @@ CREATE TABLE `policies` (
 
 INSERT INTO `policies` (`id`, `title`, `description`, `created_at`) VALUES
 (1, 'CHÍNH SÁCH ĐỔI TRẢ', '<h1>&nbsp;</h1>\r\n\r\n<p><strong>Quy định bảo h&agrave;nh &amp;&nbsp;đổi h&agrave;ng tại TuBlue Shop</strong><br />\r\n1. Tại&nbsp;<strong>TuBlue Shop</strong>tất cả sản phẩm đều được cam kết ch&iacute;nh h&atilde;ng, bảo h&agrave;nh sản phẩm bị lỗi do nh&agrave; sản xuất,&nbsp;<strong>kh&ocirc;ng&nbsp;</strong>bảo h&agrave;nh cho c&aacute;c yếu tố sai phạm hay tại nạn đồ vật khi sử dụng.</p>\r\n\r\n<ul>\r\n	<li><strong>Bảo h&agrave;nh</strong>&nbsp;trong v&ograve;ng 7 ng&agrave;y ( kể từ khi nhận h&agrave;ng )</li>\r\n	<li><strong>Bảo h&agrave;nh&nbsp;</strong>h&agrave;ng c&ograve;n nguy&ecirc;n hiện trạng như l&uacute;c b&aacute;n ra.Kh&aacute;ch h&agrave;ng xin vui l&ograve;ng kiểm tra kĩ sản phẩm như c&aacute;c lỗi d&acirc;y k&eacute;o, bung keo, bung chỉ do nh&agrave; sản xuất ..v..v.. trước khi nhận h&agrave;ng.&nbsp;</li>\r\n	<li>Sản phẩm được ph&eacute;p đổi trả l&agrave;&nbsp;<strong>chưa qua sử dụng</strong>,&nbsp;<strong>t&igrave;nh trạng c&ograve;n mới 100%</strong>&nbsp;như l&uacute;c nhận</li>\r\n	<li>Hỗ trợ<strong>&nbsp;đổi size</strong>&nbsp;với tất cả sản phẩm&nbsp;<strong>c&oacute; sẵn(*)</strong></li>\r\n	<li><strong>Kh&ocirc;ng hỗ trợ&nbsp;</strong>trả lại h&agrave;ng với sản phẩm<strong>&nbsp;giảm gi&aacute; tr&ecirc;n 15%</strong></li>\r\n	<li><strong>Trong qu&aacute; tr&igrave;nh sử dụng ( d&ugrave; 2 đến 5 năm ) ph&aacute;t hiện gi&agrave;y fake, gi&agrave;y gi&aacute; ch&uacute;ng m&igrave;nh sẽ bồi thường 130% gi&aacute; trị sản phẩm</strong></li>\r\n</ul>\r\n', '2022-03-09 18:57:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `price`
+--
+
+CREATE TABLE `price` (
+  `id` int(11) NOT NULL,
+  `rangeprice` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `price`
+--
+
+INSERT INTO `price` (`id`, `rangeprice`, `status`) VALUES
+(1, '100000-1000000 đ', 0),
+(2, '1000000-3000000 đ', 0),
+(3, '3000000-5000000 đ', 0),
+(4, 'trên 5000000 đ', 0);
 
 -- --------------------------------------------------------
 
@@ -296,19 +318,6 @@ CREATE TABLE `user_customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user_customer`
---
-
-INSERT INTO `user_customer` (`id`, `user_id`, `name`, `address`, `phone`, `code`, `title`, `price`, `quantity`, `total`, `updated_at`, `create_at`) VALUES
-(10, 10, 'ngô mạnh tú', 'thôn 7 xã phú cát', 987418333, 994, 'Ultraboost ', 3650000, 1, 3650000, '2022-03-10 18:28:33', '2022-03-10 11:28:33'),
-(11, 10, 'ngô mạnh tú', 'thôn 7 xã phú cát', 987418333, 519, 'Alphabounce 2.0', 1000000, 1, 1000000, '2022-03-10 18:29:06', '2022-03-10 11:29:06'),
-(12, 10, 'ngô mạnh tú', 'thôn 7 xã phú cát', 987418333, 262, 'T-Shirt', 500000, 1, 500000, '2022-03-10 18:29:57', '2022-03-10 11:29:57'),
-(13, 10, 'ngô mạnh tú', 'thôn 7 phúcats', 1231231234, 861, 'Alphabounce 2.0', 1000000, 1, 1000000, '2022-03-10 18:31:34', '2022-03-10 11:31:34'),
-(14, 10, 'ngô mạnh tú', 'thôn 7 xã phú cát', 987418333, 596, 'Prophere 4.0', 3500000, 3, 10500000, '2022-03-13 20:57:21', '2022-03-13 13:57:21'),
-(15, 10, 'ngô mạnh tú', 'thôn 7 xã phú cát', 987418333, 208, 'T-Shirt 03', 500000, 3, 1500000, '2022-03-13 20:58:57', '2022-03-13 13:58:57'),
-(16, 10, 'ngô mạnh tú', 'thôn 7 xã phú cát', 987418333, 896, 'Ultraboost ', 3650000, 1, 3650000, '2022-03-13 21:14:46', '2022-03-13 14:14:46');
-
---
 -- Indexes for dumped tables
 --
 
@@ -342,6 +351,12 @@ ALTER TABLE `order_detail`
 -- Indexes for table `policies`
 --
 ALTER TABLE `policies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `price`
+--
+ALTER TABLE `price`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -396,6 +411,12 @@ ALTER TABLE `order_detail`
 --
 ALTER TABLE `policies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `price`
+--
+ALTER TABLE `price`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `products`
