@@ -39,7 +39,7 @@ class ProductController extends  Controller{
         if (isset($_GET['title'])) {
           $query_additional .= '&title=' . $_GET['title'];
       }
-        $count_total =$product_model->countId();
+        $count_total =$product_model->countId($category_id);
         $params = [
             'id' => $id,
             'category_id'=>  $category_id ,
@@ -122,7 +122,7 @@ class ProductController extends  Controller{
         if(isset($_GET['title'])){
             $query_additional .= '&title='.$_GET['title'];
         }
-        $coutID = $products->countId();
+        $coutID = $products->countId_sale();
 
         $params=[
             'total' => $coutID,
@@ -157,12 +157,13 @@ class ProductController extends  Controller{
     
       $listClothing = new Product();
       $shows = $listClothing->showData();
+      $category_id = 8;
 
     $str_search = '';
     if(isset($_GET['title'])){
         $str_search .='$title='.$_GET['title'];
     }
-    $total = $listClothing->countId();
+    $total = $listClothing->countId($category_id);
     
     $params = [
         'category_id'=>8,
@@ -199,7 +200,7 @@ class ProductController extends  Controller{
         if (isset($_GET['title'])) {
             $str_search .= '&title'. $_GET['title'];
         }
-        $count = $products->countId();
+        $count = $products->count_Id();
         $params = [
             'total' => $count,
             'limit' => 12   ,

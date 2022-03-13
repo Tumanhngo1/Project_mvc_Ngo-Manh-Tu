@@ -129,8 +129,19 @@ class Product extends Model{
     }
 
     //.....................................................sale + phân trang+ tìm kiếm...............................................
-    public function countId(){
-        $sql_select = $this->connection->prepare("SELECT COUNT(id) FROM products");
+    public function countId($category_id){
+        $sql_select = $this->connection->prepare("SELECT COUNT(id) FROM products
+         where products.category_id =:category_id");
+        $select = [
+            ':category_id'=>$category_id
+        ];
+        $sql_select->execute($select);
+       return $sql_select->fetchColumn();
+    }
+    //champion
+    public function countId_sale(){
+        $sql_select = $this->connection->prepare("SELECT COUNT(id) FROM products  WHERE products.price_sale >0");
+        
         $sql_select->execute();
        return $sql_select->fetchColumn();
     }
