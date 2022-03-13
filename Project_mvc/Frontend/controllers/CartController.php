@@ -63,15 +63,16 @@ class CartController extends Controller{
             'title' => $product['title'],
             'price' => $product['price'],
             'avatars' => $product['avatars'],
-            'quantity' => $quantity,
+            'quantity' => floor($quantity),
         ];
 
 
         //    update
-           if ( $quantity > 0 && is_float($quantity)){
+           if ( $quantity > 0 ){
                 $_SESSION['cart'][$qty_id] = $update_cart;  
-           }else{
-               unset($_SESSION['cart'][$qty_id]);
+           }
+           else{
+            unset($_SESSION['cart'][$qty_id]);
            }
    
     }
