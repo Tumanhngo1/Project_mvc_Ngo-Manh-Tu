@@ -50,6 +50,22 @@
                     </div>
                     <div class="sidebar">
                         <div class="titles">
+                            <h5 class="title">Khoảng giá</h5>
+                        </div>
+                        <div class="input-title">
+
+                            <?php foreach ($prices as $price):;?>
+                            <ul>
+                                <li><i class="fa-solid fa-stop"></i></li>
+                                <li><a
+                                        href="index.php?controll=product&action=clothing&price=<?php echo $price['rangeprice'];?>"><?php echo $price['rangeprice'];?></a>
+                                </li>
+                            </ul>
+                            <?php endforeach;?>
+                        </div>
+                    </div>
+                    <div class="sidebar">
+                        <div class="titles">
                             <h5 class="title">Liên hệ</h5>
                         </div>
                         <div class="input-title">

@@ -10,11 +10,13 @@ class Product extends Model{
         if (isset($_GET['title']) && !empty($_GET['title'])) {
             $this->str_search .= " AND products.title LIKE '%{$_GET['title']}%'";
         }
+       
+
     }
 
     //sản phẩm tương tụ
     public function showData(){
-        
+       
         $sql_select = $this->connection->prepare("SELECT * FROM products 
          ORDER BY created_at ASC ");
         $sql_select->execute();
@@ -22,7 +24,7 @@ class Product extends Model{
     }
 
     //hiển thị sản phảm
-  
+ 
     public function getAll(){
         $sql_select = "SELECT products.*,categories.name as category_name FROM products 
                 inner join categories on categories.id = products.id  ";
@@ -152,6 +154,17 @@ class Product extends Model{
         $sql_select->execute();
         return $sql_select->fetchAll(PDO::FETCH_ASSOC);
     }
+    //.................................................champion....................................................
+    public function listData($params = []){
+        $price = $params['price'];
+        $limit = $params['limit'];
+        $page  = $params['page'];
+        $start = ($page - 1)*$limit;
+        $sql_select = $this->connection->prepare("SELECT * FROM products where true $this->str_search $price
+         ORDER BY created_at DESC LIMIT $start,$limit ");
+        $sql_select->execute();
+        return $sql_select->fetchAll(PDO::FETCH_ASSOC);
+    }
         //.............................................................clothing + phân trang  + tìm kiếm.....................
   
 
@@ -167,16 +180,6 @@ class Product extends Model{
         $sql_select->execute($select);
         return $sql_select->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function listData($params = []){
-        $price = $params['price'];
-        $limit = $params['limit'];
-        $page  = $params['page'];
-        $start = ($page - 1)*$limit;
-        $sql_select = $this->connection->prepare("SELECT * FROM products where true $this->str_search $price
-         ORDER BY price_sale ASC LIMIT $start,$limit ");
-        $sql_select->execute();
-        return $sql_select->fetchAll(PDO::FETCH_ASSOC);
-    }
     //  ...............................policy
     public function policy(){
          $sql_select = $this->connection->prepare("SELECT * FROM policies 
@@ -186,7 +189,7 @@ class Product extends Model{
         
     }
     public function price(){
-        $sql_select = $this->connection->prepare("SELECT * FROM price where status =0");
+        $sql_select = $this->connection->prepare("SELECT * FROM price ");
         $sql_select->execute();
         return $sql_select->fetchAll(PDO::FETCH_ASSOC);
     }

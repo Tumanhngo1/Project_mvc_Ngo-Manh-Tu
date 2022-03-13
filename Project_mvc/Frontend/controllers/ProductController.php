@@ -32,31 +32,25 @@ class ProductController extends  Controller{
 
         $categories_model = new Categories();
         $categories = $categories_model->getData();
-        //Tìm kiếm khoảng giá
+        //khoảng giá
         $prices = $product_model->price();
         $rangeprice = '';
         if(isset($_GET['price'])){
-            $price = $_GET['price'];
-      
-           $price1= preg_split('[\s]',$price);
+            $price = preg_split('[\s]',$_GET['price']);
             $from = 0;
             $to = 0;
-        
-            if($price1[0]=='trên' && $to==0){
-                $from = $price1[1];
+            if($price[0]=='trên'){
+                $from = $price[1];
             }else{
-                $price2 = preg_split('[\-]',$price1[0]);
-                $from = $price2[0];
-                $to =$price2[1];
+                $price1 = preg_split('[\-]',$price[0]);
+                $from = $price1[0];
+                $to = $price1[1];
             }
             if($to == 0){
-                $rangeprice ="and products.price >= $from";
+                $rangeprice = "and products.price > $from";
             }else{
-                $rangeprice="and $from<= products.price and products.price <=$to ";
+                $rangeprice = "and products.price >= $from and products.price <= $to";
             }
-
-          
-        
         }
 
         // phân trang
@@ -67,7 +61,7 @@ class ProductController extends  Controller{
       }
         $count_total =$product_model->countId($category_id);
         $params = [
-            'price'=> $rangeprice,
+            'price' => $rangeprice,
             'id' => $id,
             'category_id'=>  $category_id ,
             'total' => $count_total,
@@ -97,7 +91,7 @@ class ProductController extends  Controller{
             'products'=>$products,
             'categories'=>$categories,
             'shows' => $shows,
-            'prices'=> $prices
+            'prices'=>$prices
         ]);
         require_once "views/layouts/main_detail.php";
     }
@@ -123,23 +117,23 @@ class ProductController extends  Controller{
             ]);
         require_once "views/layouts/main_detail.php";
     }
-    // public function detail2(){
-    //     $product_model = new Product();
-    //     $id = $_GET['id'];
+    public function detail2(){
+        $product_model = new Product();
+        $id = $_GET['id'];
         
-    //     $product = $product_model -> geData($id);
-    //     $shows = $product_model->showData();
+        $product = $product_model -> geData($id);
+        $shows = $product_model->showData();
 
 
-    //     $categories_model = new Categories();
-    //     $categories = $categories_model->getData();
-    //     $this->content=$this->render("views/products/detail.php",[
-    //         'product' => $product,
-    //         'categories' =>$categories,
-    //         'shows'=>$shows,
-    //         ]);
-    //     require_once "views/layouts/main_detail.php";
-    // }
+        $categories_model = new Categories();
+        $categories = $categories_model->getData();
+        $this->content=$this->render("views/products/detail.php",[
+            'product' => $product,
+            'categories' =>$categories,
+            'shows'=>$shows,
+            ]);
+        require_once "views/layouts/main_detail.php";
+    }
 
     // ...............................................sale-off...........................................
     public function sale(){
@@ -150,31 +144,30 @@ class ProductController extends  Controller{
         if(isset($_GET['title'])){
             $query_additional .= '&title='.$_GET['title'];
         }
-        //khoảng giá
-        $prices = $products->price();
-        $rangeprice = '';
-        if(isset($_GET['price'])){
-            $price = $_GET['price'];
-            $price = preg_split('[\s]',$price);
-            $from = 0;
-            $to = 0;
-            if($price[0]== 'trên'){
-                $from = $price[1];
-            }else{
-                $price1 = preg_split('[\-]',$price[0]);
-                $from = $price1[0];
-                $to = $price1[1];
-            }
-            if($to == 0){
-                $rangeprice = "and products.price >= $from";
-            }else{
-                $rangeprice = "and products.price >=$from and products.price <= $to";
-            }
-        }
+          //khoảng giá
+          $prices = $products->price();
+          $rangeprice = '';
+          if(isset($_GET['price'])){
+              $price = preg_split('[\s]',$_GET['price']);
+              $from = 0;
+              $to = 0;
+              if($price[0]=='trên'){
+                  $from = $price[1];
+              }else{
+                  $price1 = preg_split('[\-]',$price[0]);
+                  $from = $price1[0];
+                  $to = $price1[1];
+              }
+              if($to == 0){
+                  $rangeprice = "and products.price > $from";
+              }else{
+                  $rangeprice = "and products.price >= $from and products.price <= $to";
+              }
+          }
         $coutID = $products->countId_sale();
 
         $params=[
-            'price'=>$rangeprice,
+            'price' => $rangeprice,
             'total' => $coutID,
             'limit' => 12,
             'controller' => 'product',
@@ -214,32 +207,30 @@ class ProductController extends  Controller{
     if(isset($_GET['title'])){
         $str_search .='$title='.$_GET['title'];
     }
-    //khoảng giá
-    $prices = $listClothing->price();
-    $rangeprice = '';
-    if(isset($_GET['price'])){
-        $price=$_GET['price'];
-        $price= preg_split('[\s]',$price);
-        $from = 0;
-        $to =0;
-        if($price[0]=='trên'){
-            $from=$price[1];
-        }else{
-            $price1 = preg_split('[\-]',$price[0]);
-            $from = $price1[0];
-            $to = $price1[1];
-        }
-        if($to == 0){
-            $rangeprice = "and products.price > $from";
-        }else{
-            $rangeprice = "and products.price >=$from and products.price <=$to";
-        }
-
-    }
+      //khoảng giá
+      $prices = $listClothing->price();
+      $rangeprice = '';
+      if(isset($_GET['price'])){
+          $price = preg_split('[\s]',$_GET['price']);
+          $from = 0;
+          $to = 0;
+          if($price[0]=='trên'){
+              $from = $price[1];
+          }else{
+              $price1 = preg_split('[\-]',$price[0]);
+              $from = $price1[0];
+              $to = $price1[1];
+          }
+          if($to == 0){
+              $rangeprice = "and products.price > $from";
+          }else{
+              $rangeprice = "and products.price >= $from and products.price <= $to";
+          }
+      }
     $total = $listClothing->countId($category_id);
     
     $params = [
-        'price' => $rangeprice,
+        'price'=>$rangeprice,
         'category_id'=>8,
         'limit' => 12,
         'total' => $total,
@@ -269,36 +260,35 @@ class ProductController extends  Controller{
     public function champion(){
         $products = new Product();
         $shows = $products->showData();
-        
+
 
         $str_search = '';
         if (isset($_GET['title'])) {
             $str_search .= '&title'. $_GET['title'];
         }
-        //khoảng giá
-        $prices = $products->price();
-        $rangeprice = '';
-        if(isset($_GET['price'])){
-            $price=$_GET['price'];
-            $price = preg_split('[\s]',$price);
-            $from = 0;
-            $to = 0;
-            if($price[0] == 'trên'){
-                $from = $price[1];
-            }else{
-                $price1 = preg_split('[\-]',$price[0]);
-                $from = $price1[0];
-                $to = $price1[1];
-            }
-            if($to == 0){
-                $rangeprice = "and products.price > $from";
-            }else{
-                $rangeprice = "and products.price > $from and products.price<$to";
-            }
-        }
+          //khoảng giá
+          $prices = $products->price();
+          $rangeprice = '';
+          if(isset($_GET['price'])){
+              $price = preg_split('[\s]',$_GET['price']);
+              $from = 0;
+              $to = 0;
+              if($price[0]=='trên'){
+                  $from = $price[1];
+              }else{
+                  $price1 = preg_split('[\-]',$price[0]);
+                  $from = $price1[0];
+                  $to = $price1[1];
+              }
+              if($to == 0){
+                  $rangeprice = "and products.price > $from";
+              }else{
+                  $rangeprice = "and products.price >= $from and products.price <= $to";
+              }
+          }
         $count = $products->count_Id();
         $params = [
-            'price' => $rangeprice,
+            'price' =>$rangeprice,
             'total' => $count,
             'limit' => 12   ,
             'query_string' => 'page',
