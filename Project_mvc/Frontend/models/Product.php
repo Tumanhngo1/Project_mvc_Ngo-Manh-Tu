@@ -10,13 +10,11 @@ class Product extends Model{
         if (isset($_GET['title']) && !empty($_GET['title'])) {
             $this->str_search .= " AND products.title LIKE '%{$_GET['title']}%'";
         }
-       
-
     }
 
     //sản phẩm tương tụ
     public function showData(){
-       
+        
         $sql_select = $this->connection->prepare("SELECT * FROM products 
          ORDER BY created_at ASC ");
         $sql_select->execute();
@@ -24,15 +22,7 @@ class Product extends Model{
     }
 
     //hiển thị sản phảm
-    public function listData($params = []){
-        $limit = $params['limit'];
-        $page  = $params['page'];
-        $start = ($page - 1)*$limit;
-        $sql_select = $this->connection->prepare("SELECT * FROM products where true $this->str_search 
-         ORDER BY created_at DESC LIMIT $start,$limit ");
-        $sql_select->execute();
-        return $sql_select->fetchAll(PDO::FETCH_ASSOC);
-    }
+  
     public function getAll(){
         $sql_select = "SELECT products.*,categories.name as category_name FROM products 
                 inner join categories on categories.id = products.id  ";
@@ -67,13 +57,13 @@ class Product extends Model{
 
     // ..............................................Phân Trang, lấy sp theo category_id, tìm kiếm.................................
     public function getAllData($params=[]){
-     
+        $price = $params['price'];
         $limit = $params['limit'];
         $page = $params['page'];
         $start = ($page - 1) * $limit;
         $sql_select = "SELECT products.*,categories.name
             FROM products inner join categories on categories.id = products.category_id
-             where products.category_id=:category_id $this->str_search 
+             where products.category_id=:category_id $price $this->str_search 
             LIMIT $start,$limit ";
         $obj_select = $this->connection->prepare($sql_select);
         $array_param = [
@@ -152,11 +142,12 @@ class Product extends Model{
        return $sql_select->fetchColumn();
     }
     public function saleOff($params){
+        $price = $params['price'];
         $limit = $params['limit'];
         $page = $params['page'];
         $start = ($page - 1)* $limit;
         $sql_select = $this->connection->prepare("SELECT * FROM products 
-        WHERE products.price_sale >0 $this->str_search 
+        WHERE products.price_sale >0 $price $this->str_search 
         LIMIT $start, $limit ");
         $sql_select->execute();
         return $sql_select->fetchAll(PDO::FETCH_ASSOC);
@@ -165,14 +156,25 @@ class Product extends Model{
   
 
     public function listClothing($params = []){
+        $price = $params['price'];
         $limit = $params['limit'];
         $page = $params['page'];
         $start = ($page - 1) * $limit;
-        $sql_select = $this->connection->prepare("SELECT * FROM products where products.category_id=:category_id  $this->str_search   limit $start,$limit ");
+        $sql_select = $this->connection->prepare("SELECT * FROM products where products.category_id=:category_id $price  $this->str_search   limit $start,$limit ");
         $select = [
             'category_id' => $params['category_id']
         ];
         $sql_select->execute($select);
+        return $sql_select->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function listData($params = []){
+        $price = $params['price'];
+        $limit = $params['limit'];
+        $page  = $params['page'];
+        $start = ($page - 1)*$limit;
+        $sql_select = $this->connection->prepare("SELECT * FROM products where true $this->str_search $price
+         ORDER BY price_sale ASC LIMIT $start,$limit ");
+        $sql_select->execute();
         return $sql_select->fetchAll(PDO::FETCH_ASSOC);
     }
     //  ...............................policy
@@ -182,6 +184,11 @@ class Product extends Model{
         $sql_select->execute();
         return $sql_select->fetchAll(PDO::FETCH_ASSOC);
         
+    }
+    public function price(){
+        $sql_select = $this->connection->prepare("SELECT * FROM price where status =0");
+        $sql_select->execute();
+        return $sql_select->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
