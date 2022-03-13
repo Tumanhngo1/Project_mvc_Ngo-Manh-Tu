@@ -138,7 +138,13 @@ class Product extends Model{
         $sql_select->execute($select);
        return $sql_select->fetchColumn();
     }
-    //champion
+    public function count_Id(){
+        $sql_select = $this->connection->prepare("SELECT COUNT(id) FROM products");
+      
+        $sql_select->execute();
+       return $sql_select->fetchColumn();
+    }
+    //sale
     public function countId_sale(){
         $sql_select = $this->connection->prepare("SELECT COUNT(id) FROM products  WHERE products.price_sale >0");
         
