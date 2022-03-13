@@ -53,16 +53,10 @@
                                         <div class="detail_check">
                                             <a class="delete" delete="<?php echo $product['id']?>" href="#"><i
                                                     class="fa-solid fa-angles-left"></i></a>
-                                            <!-- <?php
-                                            $amount = '';
-                                            if($_SESSION['cart']){
-                                                $amount = '1';
-                                            }else{
-                                                $amount = '0';
-                                            } ;?> -->
+                                            
                                             <span class="cart-amount">1</span>
 
-                                            <a class="product_title" href="#" data_id="<?php echo $product['id']?>"><i
+                                            <a class="product_title amount" href="#" data_id="<?php echo $product['id']?>"><i
                                                     class="fa-solid fa-angles-right"></i></a>
                                         </div>
                                     </td>
