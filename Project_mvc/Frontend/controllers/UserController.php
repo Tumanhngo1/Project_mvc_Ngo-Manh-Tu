@@ -66,7 +66,7 @@ class UserController extends Controller{
                 //lay mật khẩu mã hóa trong csdl
                 $user_model = new  Login();
                 $email = $user_model->getUser($email);
-                $_SESSION['email'] = $email;
+               
          
                 
 
@@ -82,7 +82,7 @@ class UserController extends Controller{
                     if ($is_login){
                        $_SESSION['success'] = "đăng nhập thành công";
                         //tạo session lưu thông tin
-                        // $_SESSION['user1'] = $user;
+                        $_SESSION['email'] = $email;
                         header("location:index.php?controller=user&action=payMent");
                         exit();
                     }
