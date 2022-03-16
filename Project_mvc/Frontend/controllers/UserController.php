@@ -29,7 +29,7 @@ class UserController extends Controller{
                 $user_model = new Login();
                 $user_email = $user_model->getUser($email);
                 if (!empty($user_email)){
-                    $_SESSION['error'] = "Username $email đã được đăng ký";
+                    $_SESSION['error'] = "Email $email đã được đăng ký";
                     header("location:index.php?controller=user&action=register");
                     exit();
                 }
