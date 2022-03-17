@@ -38,11 +38,7 @@
         <label for="quantity">Số lượng</label>
         <input class="form-control" name="quantity" id="quantity" value="<?php echo $pay['quantity'];?>">
     </div>
-    <div class="form-group">
-        <label for="total">Số lượng</label>
-        <input class="form-control" name="total" id="total" value="<?php echo $pay['total_gate'];?>">
-    </div>
-  
+
    
     <input type="submit" name="submit" class="btn btn-primary" value="Save">
     <input type="submit" name="cancel" class="btn btn-secondary" value="Back">
