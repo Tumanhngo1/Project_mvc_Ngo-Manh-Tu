@@ -41,7 +41,7 @@
             <td><?php echo $pay['code'];?></td> 
             <td><?php echo number_format($pay['price'],'0','.','.');?>đ</td>
             <td><?php echo $pay['quantity'] ?></td>
-            <td><?php echo $pay['total_gate'] ?></td>
+            <td><?php echo $pay['total'] ?></td>
             <td><?php echo date('d/m/Y',strtotime($pay['updated_at']));?> </td>
             <td>
                 <style>
