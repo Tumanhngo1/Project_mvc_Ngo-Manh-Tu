@@ -125,7 +125,7 @@ class UserController extends Controller{
             $phone = $_POST['phone'];
             if (empty($address) && empty($phone)) {
                 $this->error = "Trường này không được để trống";
-            } elseif (strlen($phone) <=8 || strlen($phone) >= 11) {
+            } elseif (strlen($phone) == 10) {
                 $this->error = "Bạn cần nhập đúng số điện thoại";
             }
             

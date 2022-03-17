@@ -66,7 +66,7 @@
                                     $total_cart += $cart_items;
                                     echo number_format($cart_items);
                                     ;?>
-                                    <input type="hidden" name="total" value="<?php echo number_format($cart_items) ;?>">
+                                    <input type="hidden" name="total" value="<?php echo $cart_items;?>">
                                 </td>
                             </tr>
                         </tbody>
@@ -74,10 +74,10 @@
 
 
                     </table>
-                    <input class="form-horizontal" name="total"
-                        value="Tổng đơn hàng: <?php echo number_format($total_cart);?>đ">
+                  
+                        <span>Tổng đơn hàng: <?php echo number_format($total_cart);?>đ</span>
                     <input type="hidden" name="order_id" value="<?php $_SESSION['email']['id'];?>">
-                    <input type="submit" name="submit" class="btn btn-success">
+                    <input type="submit" name="submit" class="btn btn-success" value="mua ngay">
                 </div>
                 <?php else :?>
                   
