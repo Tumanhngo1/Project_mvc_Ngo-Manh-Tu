@@ -2,10 +2,12 @@
 
 
 <form method="GET" action="">
+    <div class="form-group">
     <input type="text" name="title" class=" form-control" placeholder="Tìm kiếm"
         value="<?php echo isset($_GET['title']) ? $_GET['title'] : '' ?>">
     <input type="hidden" name="controller" value="product" />
     <input type="hidden" name="action" value="payMent" />
+    </div>
     <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-success">
 
 </form>
