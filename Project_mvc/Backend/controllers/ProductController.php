@@ -311,6 +311,7 @@ class ProductController extends  Controller{
                $products = new Product();
           
                     $datas = [
+                        'user_id'=> $pay['user_id'],
                         'id' => $pay['id'],
                         'name' => $name,
                         'address'=>$address,

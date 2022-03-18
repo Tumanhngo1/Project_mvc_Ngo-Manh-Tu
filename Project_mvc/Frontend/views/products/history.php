@@ -24,7 +24,7 @@
         <tbody>
             <?php foreach ($historys as $history) :?>
             <tr>
-                <th><?php echo $history['id'];?></th>
+                <th><?php echo $history['user_id'];?></th>
                 <td><?php echo $history['name'];?></td>
                 <td><?php echo $history['address'];?></td>
                 <td><?php echo $history['phone'];?></td>

@@ -332,7 +332,8 @@ class ProductController extends  Controller{
     
     public function history(){
         $product = new Product();
-        $historys = $product->history();
+        $id = $_SESSION['email']['id'];
+        $historys = $product->history($id);
         $categories_model = new Categories();
         $categories = $categories_model->getData();
         $this->content = $this->render('views/products/history.php',['categories'=>$categories,'historys'=>$historys]);

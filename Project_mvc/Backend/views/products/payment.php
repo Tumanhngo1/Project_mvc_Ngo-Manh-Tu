@@ -102,5 +102,7 @@
     </tbody>
 </table>
 
-
+<?php echo "<pre>";
+print_r($pay);
+?>
 <?php echo $pages ;?>

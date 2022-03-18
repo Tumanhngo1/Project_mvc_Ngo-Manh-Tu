@@ -162,9 +162,10 @@ class Product extends Model {
     }
    //INSERT HISTORY
    public function insertHistory($datas=[]){
-       $is_insert = $this->connection->prepare("INSERT INTO historypay(title,quantity,price,name,address,phone)
-        values(:title,:quantity,:price,:name,:adrress,:phone)");
+       $is_insert = $this->connection->prepare("INSERT INTO historypay(user_id,title,quantity,price,name,address,phone)
+        values(:user_id,:title,:quantity,:price,:name,:adrress,:phone)");
         $inserts = [
+            ':user_id'=> $datas['user_id'],
             ':title'=> $datas['title'],
             ':quantity'=>$datas['quantity'],
             ':price'=>$datas['price'],
