@@ -7,7 +7,7 @@
 
 
 
-<a href="index.php?controller=product&action=create" class="btn btn-success">Thêm mới sản phẩm</a>
+<a href="index.php?controller=policy&action=create" class="btn btn-success">Thêm mới chính sách</a>
 <table class="table table-bordered">
     <thead>
         <tr>
