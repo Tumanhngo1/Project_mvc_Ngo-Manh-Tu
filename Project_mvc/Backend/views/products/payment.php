@@ -27,6 +27,7 @@
             <th scope="col">Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Total</th>
+            <th scope="col">Status</th>
             <th scope="col">Update</th>
             <th scope="col">created_at</th>
             <th scope="col"></th>
@@ -43,7 +44,43 @@
             <td><?php echo $pay['code'];?></td> 
             <td><?php echo number_format($pay['price'],'0','.','.');?>đ</td>
             <td><?php echo $pay['quantity'] ?></td>
-            <td><?php echo $pay['total'] ?></td>
+            <td><?php $total = $pay['quantity']*$pay['price'];
+             echo number_format($total) ?>đ</td>
+            <td>
+                <form action="" method="POST">
+                <div class="form-group">
+            <input type="hidden" name="name" value="<?php echo $pay['name'];?>">
+            <input type="hidden" name="address" value="<?php echo $pay['address'];?>">
+            <input type="hidden" name="phone" value="<?php echo $pay['phone'];?>">
+            <input type="hidden" name="title" value="<?php echo $pay['title'];?>">
+            <input type="hidden" name="quantity" value="<?php echo $pay['quantity'];?>">
+          
+            <input type="hidden" name="total" value="<?php $total = $pay['quantity']*$pay['price'];
+             echo $total;?>">
+            <?php
+    
+           $selected_active = '';
+           if (isset($_POST['selected']) && $pay['id'] == $_POST['selected']): {
+                       $selected_active = 'selected';
+           
+           }
+            ;?>
+                    <select name="selected" class="form-control">
+                        <option value="0" >Đang giao hàng</option>
+                        <option value="<?php echo $pay['id']?>"<?php echo  $selected_active ;?>>Giao hàng thành công</option>
+                    </select>
+                </div>
+                <input type="submit" class="btn btn-success" name="submit" value="cập nhật">
+                <a href="index.php?controller=product&action=deletepay&id=<?php echo $pay['id'];?>" class="btn btn-warning" >Chuyển tới Lịch sử mua hàng</a> 
+            <?php else: ?>
+                <select name="selected" class="form-control">
+                        <option value="0" >Đang giao hàng</option>
+                        <option value="<?php echo $pay['id']?>"<?php echo  $selected_active ;?>>Giao hàng thành công</option>
+                    </select>
+                <input type="submit" class="btn btn-success" name="submit" value="cập nhật">
+           <?php endif?>
+                </form>
+            </td>
             <td><?php echo date('d/m/Y',strtotime($pay['updated_at']));?> </td>
             <td>
                 <style>

@@ -146,6 +146,14 @@ if (isset($_SESSION['user'])){
             </span>
                 </a>
             </li>
+            <li>
+                <a href="index.php?controller=product&action=historyindex">
+                    <i class="fa fa-code"></i> <span>Vận chuyển thành công</span>
+                    <span class="pull-right-container">
+              <!--<small class="label pull-right bg-green">new</small>-->
+            </span>
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

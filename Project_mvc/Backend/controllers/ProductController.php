@@ -106,7 +106,7 @@ class ProductController extends  Controller{
         }
         $countId = $product_model->countId();
         $params = [
-            'limit' => 10,
+            'limit' => 1,
             'total' => $countId,
             'controller' =>'product',
             'action'=>'index',
@@ -298,9 +298,36 @@ class ProductController extends  Controller{
         $paginations = new Pagination2($params);
         $pagination = $paginations->getPagination($params);
         
-     
-       
+     foreach($pays as $pay){
+       if(isset($_POST['submit'])){
+           $name = $_POST['name'];
+           $address = $_POST['address'];
+           $phone = $_POST['phone'];
+           $selected =$_POST['selected'];
+           $price = $_POST['total'];
+           $quantity = $_POST['quantity'];
+           $title = $_POST['title'];
+           if($selected == $pay['id']){
+               $products = new Product();
+          
+                    $datas = [
+                        'id' => $pay['id'],
+                        'name' => $name,
+                        'address'=>$address,
+                        'phone'=>$phone,
+                        'title'=>$title,
+                        'quantity'=>$quantity,
+                        'price'=>$price,
+                        'status'=>$selected,
 
+                    ];
+                    $is_update = $products->updateHistory($datas);
+                    $is_insert = $products->insertHistory($datas);
+                
+           }
+
+       }
+    }
         $this->page_title = "Quản lý đơn hàng";
         $this->content = $this->render('views/products/payment.php',
         ['pays'=>$pays, 'pages'=>$pagination]);
@@ -322,7 +349,7 @@ class ProductController extends  Controller{
             $phone = $_POST['phone'];
             $title = $_POST['title'];
             $price = $_POST['price'];
-            $total = $_POST['total_gate'];
+            $total = $_POST['total'];
             $code = $_POST['code'];
             $quantity = $_POST['quantity'];
             if (empty($address) && empty($phone)) {
@@ -378,7 +405,7 @@ class ProductController extends  Controller{
         $is_delete = $product_model->deletepay($id);
 
         if ($is_delete){
-            $_SESSION['success'] = "xóa sản phẩm có id = $id thành công";
+            // $_SESSION['success'] = "xóa sản phẩm có id = $id thành công";
         }else{
             $_SESSION['error'] = "xóa sp có id = $id thất bại";
         }
@@ -391,5 +418,15 @@ class ProductController extends  Controller{
         $this->content = $this->render('views/products/delete.php');
         require_once "views/layouts/main.php";
     }
+    //history
+    public function historyindex(){
+        $products = new Product();
+        $historys = $products->history();
+        
+        $this->page_title = "Chi tiết sản phẩm";
+        $this->content = $this->render('views/products/history.php',['historys'=>$historys]);
+        require_once "views/layouts/main.php";
+    }
+
     
 }

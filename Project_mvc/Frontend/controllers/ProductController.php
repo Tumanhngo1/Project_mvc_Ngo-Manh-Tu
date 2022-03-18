@@ -330,5 +330,12 @@ class ProductController extends  Controller{
         require_once "views/layouts/main_detail.php";
     }
     
-
+    public function history(){
+        $product = new Product();
+        $historys = $product->history();
+        $categories_model = new Categories();
+        $categories = $categories_model->getData();
+        $this->content = $this->render('views/products/history.php',['categories'=>$categories,'historys'=>$historys]);
+        require_once "views/layouts/main_detail.php";
+    }
 }

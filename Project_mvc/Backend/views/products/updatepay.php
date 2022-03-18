@@ -37,6 +37,9 @@
     <div class="form-group">
         <label for="quantity">Số lượng</label>
         <input class="form-control" name="quantity" id="quantity" value="<?php echo $pay['quantity'];?>">
+        <input type="hidden" class="form-control" name="total" id="quantity" value="<?php $total = ($pay['quantity']*$pay['price']);
+        echo $total
+    ;?>">
     </div>
 
    

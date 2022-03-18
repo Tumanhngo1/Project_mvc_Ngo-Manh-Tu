@@ -114,7 +114,7 @@
                                  $pro = '';
                                 if (isset($_SESSION['email'])){
                                     $cart = "<a class='card_head' href='index.php?controller=cart&action=index' ><i class='fas fa-shopping-cart'></i></a>" ;
-                                    $pro =  "<a class='card_head' href='index.php?controller=cart&action=show' ><i class='fa-brands fa-pushed'></i></a>" ;
+                                    $pro =  "<a class='card_head' href='index.php?controller=product&action=history' ><i class='fa-brands fa-pushed'></i></a>" ;
                                 }else{
                                     $cart = "<a class='card_head'  href='index.php?controller=cart&action=index' ><i class='fas fa-shopping-cart'></i></a>";
                                     $pro = "<a class='card_head'  href='index.php?controller=user&action=login' ><i class='fa-brands fa-pushed'></i></a>";

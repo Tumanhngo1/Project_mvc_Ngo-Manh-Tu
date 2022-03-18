@@ -160,6 +160,31 @@ class Product extends Model {
         $sql_delete= $this->connection->prepare("DELETE FROM user_customer where id=$id");
         return $sql_delete->execute();
     }
-   
-    
+   //INSERT HISTORY
+   public function insertHistory($datas=[]){
+       $is_insert = $this->connection->prepare("INSERT INTO historypay(title,quantity,price,name,address,phone)
+        values(:title,:quantity,:price,:name,:adrress,:phone)");
+        $inserts = [
+            ':title'=> $datas['title'],
+            ':quantity'=>$datas['quantity'],
+            ':price'=>$datas['price'],
+            ':name'=>$datas['name'],
+            ':adrress'=>$datas['address'],
+            ':phone'=>$datas['phone']
+        ];
+        return $is_insert->execute($inserts);
+   }
+   public function updateHistory($datas=[]){
+       $is_update = $this->connection->prepare("UPDATE user_customer SET status =:status where id = :id ");
+       $update = [
+           ':status' => $datas['status'],
+           ':id'=>$datas['id']
+       ];
+       return $is_update->execute($update);
+   }
+   public function history(){
+       $is_select = $this->connection->prepare("SELECT * FROM historypay order by created_at DESC");
+       $is_select->execute();
+       return $is_select->fetchAll(PDO::FETCH_ASSOC);
+   }
 }

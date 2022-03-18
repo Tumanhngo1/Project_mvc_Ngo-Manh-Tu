@@ -194,6 +194,11 @@ class Product extends Model{
         return $sql_select->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function history(){
+        $is_select = $this->connection->prepare("SELECT * FROM historypay order by created_at DESC");
+        $is_select->execute();
+        return $is_select->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
 }
