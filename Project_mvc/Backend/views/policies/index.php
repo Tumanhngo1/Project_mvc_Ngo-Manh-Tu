@@ -3,7 +3,7 @@
 
 
 </form>
-<h2>Danh sách sản phẩm</h2>
+<h2>Danh chính sách</h2>
 
 
 
