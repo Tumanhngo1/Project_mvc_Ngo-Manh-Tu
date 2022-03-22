@@ -23,7 +23,7 @@ class ProductController extends  Controller{
     
     //show
     public function index(){
-
+        
         $product_model = new Product();
         $id = $_GET['id'];
         $product = $product_model->getOne($id);
@@ -101,6 +101,11 @@ class ProductController extends  Controller{
    
     //detaij
     public function detail(){
+        if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
+            $_SESSION['error'] = " không tông tại sản phẩm bạn đang cần tìm";
+            header("location:index.php?controller=product&action=champion");
+            exit();
+        }
         $product_model = new Product();
         $id = $_GET['id'];
         

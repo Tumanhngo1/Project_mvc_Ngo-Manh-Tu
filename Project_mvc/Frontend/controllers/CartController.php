@@ -77,28 +77,19 @@ class CartController extends Controller{
    
     }
     public function deleteData(){
-
         $product_id = $_GET['product_id'];
-        $product_model = new Product();
-        $product = $product_model->getById($product_id);
-        $update_cart=[
-            'title' => $product['title'],
-            'price' => $product['price'],
-            'avatars' => $product['avatars'],
-            'quantity' =>0 ,
-        ];
-        if (   $_SESSION['cart']['quantity'] == 0){
+        if ($_SESSION['cart']){
             unset($_SESSION['cart'][$product_id]); 
        }
     }
     // ............................delete........................................
-    public function delete(){
-        $productId =$_GET['id'] ?? null;
-        unset($_SESSION['cart'][$productId]);
-        header("location:index.php?controller=cart&action=index");
-        exit();
+    // public function delete(){
+    //     $productId =$_GET['id'] ?? null;
+    //     unset($_SESSION['cart'][$productId]);
+    //     header("location:index.php?controller=cart&action=index");
+    //     exit();
 
-    }
+    // }
     
 
 

@@ -66,12 +66,6 @@ class UserController extends Controller{
                 //lay mật khẩu mã hóa trong csdl
                 $user_model = new  Login();
                 $email = $user_model->getUser($email);
-               
-         
-                
-
-
-
                 if (empty($email)){
                     $this->error = "Người dùng không tồn tại";
                 }else{
@@ -120,7 +114,7 @@ class UserController extends Controller{
     public function payMent(){
 
         if (isset($_POST['submit'])) {
-            $name = $_SESSION['email']['name'];
+            $name = $_POST['name'];
             $address = $_POST['address'];
             $phone = $_POST['phone'];
             if (empty($address) && empty($phone)) {
